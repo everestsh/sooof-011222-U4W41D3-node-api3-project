@@ -41,6 +41,7 @@ router.post('/', validateUser, (req, res, next) => {
   User.insert(req.body)
     .then( user =>{
       // console.log(user)
+      // throw new Error('demons!!!!')
       res.status(201).json(user)
     })
     .catch(next)
