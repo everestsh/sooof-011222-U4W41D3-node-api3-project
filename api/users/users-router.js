@@ -52,10 +52,23 @@ router.put('/:id', validateUserId, validateUser, (req, res, next) => {
   // and another middleware to check that the request body is valid
   // console.log(req.user)
   // console.log(req.name)
+  // way 1
+  // User.update(req.params.id, req.body)
+  //   .then( user=>{
+  //     // console.log(user)
+  //     res.status(200).json(user)
+  //   })
+  //   .catch(next)
+
+  // way 2
   User.update(req.params.id, req.body)
+    .then( (result)=>{
+      console.log("result = ",result)
+      return User.getById(req.params.id)
+    })
     .then( user=>{
-      // console.log(user)
-      res.status(200).json(user)
+      console.log(user)
+      res.json(user)
     })
     .catch(next)
 });
